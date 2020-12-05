@@ -7,21 +7,12 @@
   multiplied by their level of depth.
 """
 
-#IN PROGRESS
-def productSum(array):
-	#loop through array
-	# if item in array is an open parenthesis, multiply
-	# and search for closing bracket
-	# else add index values
-	i = 0
-	if(array[i][1] == "]"):
-		#add total values in parenthesis
-		temp_sum += array[i][0]
-		#multiply to values in parenthesis
-		i +=1
-		sum_value *= temp_sum
-		return sum_value
-	if(array[i][0] == "["):
-		temp_sum+= array[i][1]
-		#sum_value += 
-		productSum(array[i])
+def productSum(array, depth=1):
+	sum_num = 0
+	for i in range(len(array)):
+		print(array[i])
+		if(type(array[i]) is list):
+			sum_num += productSum(array[i], depth + 1)
+		else:
+			sum_num += array[i]
+	return (depth * sum_num)
