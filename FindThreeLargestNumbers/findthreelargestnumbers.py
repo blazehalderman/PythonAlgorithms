@@ -5,37 +5,23 @@
 """
 
 def findThreeLargestNumbers(array):
-	#loop through array
-	larg = []
-	big = 0
-	n = 3
-	while(n > 0):
-		for i in range(len(array)):
-			if(array[i] is not None):
-				if(array[i] > big and findNum(larg, array[i])):
-					big = array[i]
-		larg.append(big)
-		big = 0
-		n-=1
-	temp = larg[0]
-	larg[0] = larg[2]
-	larg[2] = temp
-	larg = numCheck(larg)
+	#define array for finite list
+	larg = [None, None, None]
+	#search array first largest value or current num greater then stored num
+	#move to next index in reverse and repeat steps until no more largest value
+	for i in range(len(array)):
+		if(larg[2] == None or array[i] > larg[2]):
+			checkValues(larg, 2, array[i])
+		elif(larg[1] == None or array[i] > larg[1]):
+			checkValues(larg, 1, array[i])
+		elif(larg[0] == None or array[i] > larg[0]):
+			checkValues(larg, 0, array[i])
 	return(larg)
 
-def numCheck(array):
-	i = 2
-	while(i > 0):
-		temp = array[i]
-		print(temp)
-		i-=1
-		if(array[i] == 0):
-			array[i] = temp
-			temp = 0
-	return array
-			
-def findNum(array, num):
-	for item in array:
-		if(item == num):
-			return False
-	return True
+#shifts index values up to current index
+def checkValues(array, index, num):
+	for i in range(index + 1):
+		if (i == index):
+			array[i] = num
+		else:
+			array[i] = array[i + 1]
