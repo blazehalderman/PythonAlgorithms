@@ -10,25 +10,14 @@
 """
 
 def runLengthEncoding(string):
-    # Write your code here.
-	char = None
-	count_values = []
 	count = 1
-	i = 1
 	new_string = ""
-	char = string[0]
 	print(str(len(string)))
-	while(i < len(string)):
-		#if hit a same character continue
-		if(string[i] == char):
-			count += 1
-			if(count % 9 == 0):
-				new_string += str(count) + char
-				count = 0
-		if(i == len(string) - 1 or string[i] != char):
-			count_values.append(count)
+	for i in range(1, len(string)):
+		char = string[i - 1]
+		if(string[i] != char or count % 9 == 0):
 			new_string += str(count) + char
-			char = string[i]
-			count = 1
-		i += 1 
+			count = 0
+		count += 1
+	new_string += str(count) + string[len(string) - 1]
 	return(new_string)
